@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "food-app-f91c9": {
+      "hosting": {
+        "food-app": [
+          "food-app-f91c9"
+        ]
+      }
+    }
+  }
+}

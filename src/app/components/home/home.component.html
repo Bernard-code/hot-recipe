@@ -1,0 +1,11 @@
+
+<div class="container">
+  <app-search></app-search>
+  <div class="recipe-list">
+    <div
+      *ngFor="let item of meals"
+      class="recipe">
+      <app-recipe [meal]="item"></app-recipe>
+    </div>
+  </div>
+</div>

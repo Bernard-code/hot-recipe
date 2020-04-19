@@ -1,0 +1,17 @@
+.container {
+  padding: 15px;
+}
+.recipe-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  .recipe {
+    margin: 10px;
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 4px -2px #444445;
+    cursor: pointer;
+  }
+
+}

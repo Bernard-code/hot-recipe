@@ -1,0 +1,27 @@
+
+<div class="container"
+  *ngIf="showWebcam">
+  <div class="row top">
+    <webcam
+      [trigger]="triggerObservable"
+      (imageCapture)="handleImage($event)"
+      [switchCamera]="nextWebcamObservable"
+      [videoOptions]="videoOptions"
+      [allowCameraSwitch]="allowCameraSwitch"
+      [imageQuality]="1"
+      (cameraSwitched)="cameraWasSwitched($event)"
+      (initError)="handleInitError($event)"
+    ></webcam>
+  </div>
+  <div class="row bottom">
+    <button type="button" class="close">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button type="button" class="flip">
+      <mat-icon>flip_camera_ios</mat-icon>
+    </button>
+    <button type="button" class="shoot">
+      <mat-icon>camera</mat-icon>
+    </button>
+  </div>
+</div>

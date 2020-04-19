@@ -1,0 +1,57 @@
+
+<form
+  #addForm="ngForm"
+  class="add-form"
+  (ngSubmit)="onSubmit(addForm)">
+  <app-capture-img
+    [showWebcam]="useCamera"
+    (imgEmitter)="onHandleImageEmit($event)"></app-capture-img>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      name="name"
+      ngModel
+      matInput placeholder="">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Making time</mat-label>
+    <input
+      name="makingTime"
+      ngModel
+      matInput placeholder="">
+  </mat-form-field>
+  <div class="img-section">
+    <input
+      (change)="onFileSelect($event)"
+      type="file" class="file-input" id="file-input">
+    <label class="add-btn" (click)="onFileCapture(e)">
+      Camera
+      <mat-icon>camera_alt</mat-icon>
+    </label>
+    <label class="add-btn" for="file-input">
+      Photo
+      <mat-icon>add_photo_alternate</mat-icon>
+    </label>
+    <div class="show-pic" [ngStyle]="{'background-image': 'url(' + (downloadURL | async) + ')'}"></div>
+  </div>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input
+      name="category"
+      ngModel
+      matInput placeholder="">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tags</mat-label>
+    <input
+      name="tags"
+      ngModel
+      matInput placeholder="Separate tags with commas">
+  </mat-form-field>
+  <button class="submit-btn" type="submit">
+    Submit
+    <mat-icon>favorite_border</mat-icon>
+  </button>
+
+  {{ uploadPercent | async }}
+</form>

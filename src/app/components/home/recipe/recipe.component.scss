@@ -1,0 +1,45 @@
+
+.title {
+  padding: 5px;
+  margin: 5px 0;
+}
+.tags-cats {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px;
+  justify-content: space-between;
+}
+.category {
+  color: rgb(189, 33, 33);
+  font-weight: bold;
+  cursor: pointer;
+  transition: color ease .4s;
+  &:hover,
+  &:active,
+  &:focus {
+    color: rgb(250, 94, 94);
+  }
+}
+.tags {
+  color: rgb(96, 96, 96);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  .tag {
+    transition: color ease .4s;
+  }
+  &:hover,
+  &:active,
+  &:focus {
+    .tag {
+      color: rgb(195, 195, 195);
+    }
+  }
+}
+.recipe-img {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

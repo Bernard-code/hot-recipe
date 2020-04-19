@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Tags</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-select [(value)]="selectedTag">
+      <mat-option *ngFor="let tag of this.data" [value]="tag">
+        {{ tag }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="selectedTag">Close</button>
+</div>

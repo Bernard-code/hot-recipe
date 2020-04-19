@@ -1,0 +1,37 @@
+.nav {
+  border: rgb(210, 210, 210) 1px solid;
+  display: flex;
+  padding: 0 10px;
+  a {
+    padding: 10px 0;
+    margin-right: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgb(43, 127, 226);
+    font-size: 16px;
+    transition: color ease .4s;
+    position: relative;
+    &:after {
+      transform: translateY(-5px);
+      transition: all ease .4s;
+      opacity: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      background: rgb(43, 127, 226);
+      position: absolute;
+      content: '';
+    }
+    &:hover,
+    &.active,
+    &:focus {
+      &:after {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      color: rgb(43, 127, 226);
+      outline: none;
+    }
+  }
+}

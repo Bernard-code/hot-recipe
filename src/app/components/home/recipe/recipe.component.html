@@ -1,0 +1,17 @@
+
+<div
+  *ngIf="mealImage$ | async as mealImage"
+  [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
+  class="recipe-img">
+</div>
+<h4 class="title">{{ meal.name }}</h4>
+<div class="tags-cats">
+  <div class="category">{{ meal.category }}</div>
+  <div class="tags" (click)="openDialog()">
+    <span
+    *ngFor="let tag of meal.tags"
+    class="tag">
+      {{ tag }}
+    </span>
+  </div>
+</div>

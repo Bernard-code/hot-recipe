@@ -1,0 +1,11 @@
+
+  <mat-form-field appearance="standard">
+    <mat-label>Search food...</mat-label>
+    <input
+      (input)="onSearchChange($event)"
+      [(ngModel)]="search"
+      matInput
+      placeholder="Hungry !">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+bring forms module to app module
