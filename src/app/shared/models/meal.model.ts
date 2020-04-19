@@ -5,5 +5,6 @@ export interface Meal {
   category?: string;
   tags?: string[];
   makingTime?: string;
-  timestamp: number;
+  timestamp: number | Date;
+  id?: string;
 }

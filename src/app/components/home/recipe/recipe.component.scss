@@ -1,45 +1,60 @@
 
-.title {
-  padding: 5px;
-  margin: 5px 0;
-}
-.tags-cats {
-  display: flex;
-  flex-direction: row;
-  padding: 5px 5px;
-  justify-content: space-between;
-}
-.category {
-  color: rgb(189, 33, 33);
-  font-weight: bold;
-  cursor: pointer;
-  transition: color ease .4s;
-  &:hover,
-  &:active,
-  &:focus {
-    color: rgb(250, 94, 94);
-  }
-}
-.tags {
-  color: rgb(96, 96, 96);
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  .tag {
-    transition: color ease .4s;
-  }
-  &:hover,
-  &:active,
-  &:focus {
-    .tag {
-      color: rgb(195, 195, 195);
+  .recipe-wrap {
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px -2px #444445;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+   
+    &:hover {
+      box-shadow: 1px 1px 4px -1px #444445;
+    }
+
+    .recipe-img {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      width: 150px;
+      height: 150px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    .title-box {
+      display: flex;
+      flex-direction: column;
+      .title {
+        padding: 5px;
+        margin: 5px 0;
+      }
+      .category {
+        padding: 0 5px;
+        color: rgb(189, 33, 33);
+        font-weight: bold;
+        cursor: pointer;
+        transition: color ease .4s;
+        margin-bottom: auto;
+        &:hover,
+        &:active,
+        &:focus {
+          color: rgb(250, 94, 94);
+        }
+      }
+      .tags {
+        cursor: pointer;
+        color: rgb(96, 96, 96);
+        padding: 0 5px;
+        margin-bottom: 5px;
+        .tag {
+          transition: color ease .4s;
+          margin-right: 5px;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+          .tag {
+            color: rgb(195, 195, 195);
+          }
+        }
+      }
     }
   }
-}
-.recipe-img {
-  width: 100%;
-  height: 250px;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-}

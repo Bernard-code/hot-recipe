@@ -1,0 +1,61 @@
+
+<div class="recipe-wrap" *ngIf=" meal$ | async as meal ">
+  <div
+    *ngIf="mealImage$ | async as mealImage"
+    [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
+    class="recipe-img">
+  </div>
+  <form 
+    (ngSubmit)="onUpdateRecipe()"
+    [formGroup]="editForm"
+    class="title-box">
+    <h4 class="title">{{ meal.name }}</h4>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        id="name"
+        formControlName="name"
+        matInput 
+        placeholder="Recipe name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <input
+        id="category"
+        formControlName="category"
+        matInput 
+        placeholder="Category">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tags</mat-label>
+      <input
+        id="tags"
+        formControlName="tags"
+        matInput 
+        placeholder="Separate tags by comma">
+    </mat-form-field>
+
+    <div class="options">
+      <button 
+        mat-raised-button 
+        color="primary"
+        class="update-button"
+        type="submit">
+        Update
+        <mat-icon>save</mat-icon>
+      </button>
+      <button 
+        mat-raised-button 
+        color="warn"
+        class="delete-button"
+        (click)="openDeleteDialog()">
+        Delete
+        <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,37 @@
+
+<div class="recipe-wrap" *ngIf=" meal$ | async as meal ">
+    <div
+      *ngIf="mealImage$ | async as mealImage"
+      [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
+      class="recipe-img">
+    </div>
+    <div class="title-box">
+        <h4 class="title">{{ meal.name }}</h4>        
+        <div class="category">{{ meal.category }}</div>
+        <div class="tags">
+            <span
+            *ngFor="let tag of meal.tags"
+            class="tag">
+                {{ tag }};
+            </span>
+        </div>
+        <div class="options">
+            <button 
+                mat-raised-button 
+                color="primary"
+                class="update-button"
+                (click)="onUpdateRecipe()">
+                Update
+                <mat-icon>delete</mat-icon>
+                </button>
+            <button 
+                mat-raised-button 
+                color="warn"
+                class="delete-button"
+                (click)="openDeleteDialog()">
+                Delete
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div> 
+</div>

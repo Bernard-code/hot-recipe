@@ -34,7 +34,8 @@
     </label>
     <div class="show-pic" [ngStyle]="{'background-image': 'url(' + (downloadURL | async) + ')'}"></div>
   </div>
-  <mat-form-field>
+  <mat-form-field
+  class="cat-input">
     <mat-label>Category</mat-label>
     <input
       name="category"
@@ -53,5 +54,5 @@
     <mat-icon>favorite_border</mat-icon>
   </button>
 
-  {{ uploadPercent | async }}
+  {{ uploadPercent$ | async }}
 </form>

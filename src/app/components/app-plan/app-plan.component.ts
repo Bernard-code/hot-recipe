@@ -6,14 +6,15 @@ import { Component } from '@angular/core';
 })
 export class AppPlanComponent {
   plan = [
-    'cam access',
-    'add meal services',
-    'recipe list layout',
     'recipe page',
-    'recipe edit/delete',
+    'recipe edit',
+    'cam access',
+    'first deploy for mobile',
     'select by tags/category',
     'add calories',
     'compose day plan of eating',
-    'first deploy for mobile'
+    'delete recipe -> snack bar notification',
+    'images stored on device - service workers',
+    'webcam style on mobile',
   ]
 }

@@ -31,12 +31,12 @@ export class CaptureImgComponent implements OnInit {
       });
   }
 
-  public triggerSnapshot(): void {
-    this.trigger.next();
+  onWebcamClose(){
+    this.showWebcam = false;
   }
 
-  public toggleWebcam(): void {
-    this.showWebcam = !this.showWebcam;
+  public triggerSnapshot(): void {
+    this.trigger.next();
   }
 
   public handleInitError(error: WebcamInitError): void {

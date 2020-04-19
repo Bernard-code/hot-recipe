@@ -1,10 +1,7 @@
-import { Component, Inject, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Meal } from '../../../shared/models/meal.model';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
-import { AngularFireStorage } from '@angular/fire/storage';
-import 'firebase/storage';
 import { Observable } from 'rxjs';
+import { FileService } from 'src/app/shared/services/file.service';
 
 @Component({
   selector: 'app-recipe',
@@ -15,27 +12,14 @@ export class RecipeComponent implements OnInit {
   @Input() meal:Meal;
   mealImage$: Observable<string | null>;
 
-  ngOnInit(){
-    if( this.meal.img ) {
-      const ref = this.storage.ref( this.meal.img );
-      this.mealImage$ = ref.getDownloadURL();
-    }
-  }
-
   constructor(
-    public dialog: MatDialog,
-    private storage: AngularFireStorage
+    private fileService: FileService,
   ) { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: this.meal.tags
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+  ngOnInit(){
+    if( this.meal.img ) {
+      this.mealImage$ = this.fileService.getImage(this.meal.img);
+    }
   }
 
 }
