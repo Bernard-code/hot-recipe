@@ -11,6 +11,7 @@ export class AppPlanComponent {
     'add cool font with weights: 200, 400, 500, 600, 700, 900',
     'ocena przepisu/ulubione',
     'robione/nie robione',
+    'jakis lepszy fajny design',
 
     'compose day of eating',
     'days of eating library',
