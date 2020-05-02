@@ -18,26 +18,39 @@
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      mat-icon {
+        height: auto;
+        width: auto;
+        font-size: 100px;
+        color: #7b7b7b;
+      }
     }
     .title-box {
       display: flex;
       flex-direction: column;
+      width: 150px;
       .title {
         padding: 5px;
         margin: 5px 0;
       }
+      .making-time,
       .category {
         padding: 0 5px;
         color: rgb(189, 33, 33);
         font-weight: bold;
         cursor: pointer;
         transition: color ease .4s;
-        margin-bottom: auto;
         &:hover,
         &:active,
         &:focus {
           color: rgb(250, 94, 94);
         }
+      }
+      .making-time {
+        margin-bottom: auto;
       }
       .tags {
         cursor: pointer;

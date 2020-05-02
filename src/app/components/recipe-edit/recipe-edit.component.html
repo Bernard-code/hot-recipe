@@ -1,60 +1,114 @@
 
 <div class="recipe-wrap" *ngIf=" meal$ | async as meal ">
-  <div
-    *ngIf="mealImage$ | async as mealImage"
-    [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
-    class="recipe-img">
-  </div>
+  <!-- recipe image -->
+
   <form 
-    (ngSubmit)="onUpdateRecipe()"
-    [formGroup]="editForm"
-    class="title-box">
-    <h4 class="title">{{ meal.name }}</h4>
+  (ngSubmit)="onUpdateRecipe()"
+  [formGroup]="editForm"
+  (keydown.enter)="$event.preventDefault()"
+  class="title-box">
 
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input
-        id="name"
-        formControlName="name"
-        matInput 
-        placeholder="Recipe name">
-    </mat-form-field>
+   <div class="row img-row">
+      <div
+        *ngIf="mealImage$ | async as mealImage"
+        [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
+        class="recipe-img">
+      </div>
+  
+      <div class="column">
+        <!-- name field -->
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            id="name"
+            formControlName="name"
+            matInput 
+            placeholder="Recipe name">
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Category</mat-label>
-      <input
-        id="category"
-        formControlName="category"
-        matInput 
-        placeholder="Category">
-    </mat-form-field>
+        <!-- making time field -->
+        <mat-form-field>
+          <mat-label>Making time</mat-label>
+          <input
+            name="makingTime"
+            formControlName="makingTime"
+            matInput placeholder="">
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Tags</mat-label>
-      <input
-        id="tags"
-        formControlName="tags"
-        matInput 
-        placeholder="Separate tags by comma">
-    </mat-form-field>
+        <!-- Category -->
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <input
+            id="category"
+            formControlName="category"
+            matInput 
+            placeholder="Category">
+        </mat-form-field>
+      </div>
 
-    <div class="options">
-      <button 
-        mat-raised-button 
-        color="primary"
-        class="update-button"
-        type="submit">
-        Update
-        <mat-icon>save</mat-icon>
-      </button>
-      <button 
-        mat-raised-button 
-        color="warn"
-        class="delete-button"
-        (click)="openDeleteDialog()">
-        Delete
-        <mat-icon>delete</mat-icon>
+    </div>
+
+    <div class="row">
+
+      <!-- ingredients -->
+      <app-ordered-list
+        [label]="'Ingredients'"
+        [items]="editForm.get('ingredients').value"
+        (emitValue)="onAddIngr($event)"
+      ></app-ordered-list>
+
+      <!-- steps -->
+      <app-ordered-list
+        [label]="'Steps'"
+        [items]="editForm.get('steps').value"
+        (emitValue)="onAddStep($event)"
+      ></app-ordered-list>
+
+      <!-- tags -->
+      <app-ordered-list
+        [label]="'Tags'"
+        [items]="editForm.get('tags').value"
+        (emitValue)="onAddSTag($event)"
+      ></app-ordered-list>
+
+      <!-- description -->
+      <mat-form-field class="description">
+        <mat-label>Description</mat-label>
+        <textarea
+          name="description"
+          formControlName="description"
+          matInput placeholder="">
+        </textarea>
+      </mat-form-field>
+
+      <div class="options">
+        <button 
+          [routerLink]="['/recipe-view', meal.id]"
+          mat-raised-button 
+          color="primary"
+          class="update-button"
+          type="button">
+          <mat-icon>chevron_left</mat-icon>
+          Go back
         </button>
+        <button 
+          mat-raised-button 
+          color="primary"
+          class="update-button"
+          type="submit">
+          Update
+          <mat-icon>save</mat-icon>
+        </button>
+        <button 
+          mat-raised-button 
+          color="warn"
+          class="delete-button"
+          (click)="openDeleteDialog()"
+          type="button">
+          Delete
+          <mat-icon>delete</mat-icon>
+          </button>
+      </div>
     </div>
   </form>
 

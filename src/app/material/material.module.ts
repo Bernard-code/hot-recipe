@@ -4,13 +4,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs'; 
 
 import {
   MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 const MaterialComponents = [
@@ -23,7 +25,9 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatDialogModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

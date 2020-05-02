@@ -1,58 +1,117 @@
 
 <form
-  #addForm="ngForm"
-  class="add-form"
-  (ngSubmit)="onSubmit(addForm)">
+  (ngSubmit)="onSubmit()"
+  [formGroup]="mealForm"
+  (keydown.enter)="$event.preventDefault()"
+  class="add-form">
+
+  <!-- webcam-component -->
   <app-capture-img
     [showWebcam]="useCamera"
     (imgEmitter)="onHandleImageEmit($event)"></app-capture-img>
+  
+  <!-- name field -->
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input
       name="name"
-      ngModel
+      formControlName="name"
       matInput placeholder="">
   </mat-form-field>
+
+  <!-- making time field -->
   <mat-form-field>
     <mat-label>Making time</mat-label>
     <input
       name="makingTime"
-      ngModel
+      formControlName="makingTime"
       matInput placeholder="">
   </mat-form-field>
-  <div class="img-section">
-    <input
-      (change)="onFileSelect($event)"
-      type="file" class="file-input" id="file-input">
-    <label class="add-btn" (click)="onFileCapture(e)">
-      Camera
-      <mat-icon>camera_alt</mat-icon>
-    </label>
-    <label class="add-btn" for="file-input">
-      Photo
-      <mat-icon>add_photo_alternate</mat-icon>
-    </label>
-    <div class="show-pic" [ngStyle]="{'background-image': 'url(' + (downloadURL | async) + ')'}"></div>
-  </div>
+
+  <!-- Category -->
   <mat-form-field
   class="cat-input">
     <mat-label>Category</mat-label>
     <input
       name="category"
-      ngModel
+      formControlName="category"
       matInput placeholder="">
   </mat-form-field>
+
+  <!-- ingredients -->
+  <app-ordered-list
+    [label]="'Ingredients'"
+    [items]="mealForm.get('ingredients').value"
+    (emitValue)="onAddIngr($event)"
+  ></app-ordered-list>
+
+  <!-- steps -->
+  <app-ordered-list
+    [label]="'Steps'"
+    [items]="mealForm.get('steps').value"
+    (emitValue)="onAddStep($event)"
+  ></app-ordered-list>
+
+  <!-- tags -->
+  <app-ordered-list
+    [label]="'Tags'"
+    [items]="mealForm.get('tags').value"
+    (emitValue)="onAddSTag($event)"
+  ></app-ordered-list>
+
+  <!-- description -->
   <mat-form-field>
-    <mat-label>Tags</mat-label>
-    <input
-      name="tags"
-      ngModel
-      matInput placeholder="Separate tags with commas">
+    <mat-label>Description</mat-label>
+    <textarea
+      name="description"
+      formControlName="description"
+      matInput placeholder="">
+    </textarea>
   </mat-form-field>
-  <button class="submit-btn" type="submit">
+
+  <!-- img field -->
+  <div class="img-section">
+    <div class="img-row">
+      <input
+        #fileInput
+        (change)="onFileSelect($event)"
+        type="file"
+        class="file-input"
+        id="file-input">
+  
+      <!-- photo -->
+      <button 
+        type="button" 
+        (click)="fileInput.click()"
+        mat-raised-button>
+        Photo
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+  
+      <!-- camera -->
+      <!-- <button 
+        type="button" 
+        (click)="onFileCapture(e)"
+        mat-raised-button>
+        Camera
+        <mat-icon>camera_alt</mat-icon>
+      </button> -->
+    </div>
+    <div class="img-row">
+      <!-- preview -->
+      <div 
+        class="show-pic" 
+        [ngStyle]="{'background-image': 'url(' + (downloadURL | async) + ')'}"></div>  
+    </div>
+  </div>
+
+  <button 
+    type="submit" 
+    class="submit-btn"
+    mat-raised-button>
     Submit
     <mat-icon>favorite_border</mat-icon>
   </button>
 
-  {{ uploadPercent$ | async }}
+  {{ uploadPercent$ | async | floor }}
 </form>

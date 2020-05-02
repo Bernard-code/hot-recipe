@@ -1,13 +1,19 @@
 
   <div class="recipe-wrap">
     <div
-      *ngIf="mealImage$ | async as mealImage"
+      *ngIf="mealImage$ | async as mealImage; else noImage"
       [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
       class="recipe-img">
     </div>
+    <ng-template #noImage>
+      <div class="recipe-img">
+        <mat-icon>fastfood</mat-icon>
+      </div>
+    </ng-template>
     <div class="title-box">
-      <h4 class="title">{{ meal.name }}</h4>
+      <h4 class="title">{{ meal.name | truncate: 70 }}</h4>
       <div class="category">{{ meal.category }}</div>
+      <div class="making-time">{{ meal.makingTime }}</div>
       <div class="tags">
         <span
         *ngFor="let tag of meal.tags"

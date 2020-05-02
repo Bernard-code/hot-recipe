@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import 'firebase/storage';
 import { v1 as uuidv1 } from 'uuid';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +9,7 @@ import { Router } from '@angular/router';
 export class FileService {
 
   constructor(
-    private storage: AngularFireStorage,
-    private router: Router
+    private storage: AngularFireStorage
   ) { }
 
   getImage(id) {
@@ -54,6 +51,7 @@ export class FileService {
   }
   
   deleteItem(id: string) {
-    const deletedFile = this.storage.ref( id ).delete();
+    const deletedFile = this.storage.ref( id );
+    return deletedFile.delete();
   }
 }

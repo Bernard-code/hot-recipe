@@ -1,0 +1,42 @@
+
+.list-row {
+  display: flex;
+  .list-input {
+    position: relative;
+    margin-top: 5px;      
+    width: 60%;
+    .add-item {
+      position: absolute;
+      // top: 5px;
+      right: 5px;
+      top: -15px;
+      cursor: pointer;
+      color: #fff;
+    }
+  }
+  .outer-wrapper {
+    overflow-y: scroll;
+    max-height: 120px;
+    width: 40%;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    .list-wrapper {
+      display: flex;
+      flex-direction: column-reverse;
+      .single-item {
+        margin-bottom: 5px;
+        border-bottom: 1px solid rgb(221, 221, 221);
+        display: flex;
+        justify-content: flex-start;
+        mat-icon {
+          margin: 0 15px 0 0;
+          cursor:pointer;
+          &.remove-icon {
+            margin: 0 5px 0 15px;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}

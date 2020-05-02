@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
   
   onClickRecipe(id: number) {
-    this.router.navigate(['recipe-edit', id]);
+    this.router.navigate(['recipe-view', id]);
   }
 
 }

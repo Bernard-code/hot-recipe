@@ -24,6 +24,12 @@ import { DeleteDialogComponent } from './components/recipe-edit/delete-dialog/de
 import { ExpandDirective } from './shared/directives/expand.directive';
 import { RecipeEditComponent } from './components/recipe-edit/recipe-edit.component';
 import { RecipePageComponent } from './components/recipe-page/recipe-page.component';
+import { FloorPipe } from './shared/pipes/floor.pipe';
+import { OrderedListComponent } from './shared/components/ordered-list/ordered-list.component';
+import { TruncatePipe } from './shared/pipes/truncate.pipe';
+import { RecipeOverviewComponent } from './components/recipe-page/recipe-overview/recipe-overview.component';
+import { RecipeStepsComponent } from './components/recipe-page/recipe-steps/recipe-steps.component';
+import { RecipeIngredientsComponent } from './components/recipe-page/recipe-ingredients/recipe-ingredients.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,13 @@ import { RecipePageComponent } from './components/recipe-page/recipe-page.compon
     DeleteDialogComponent,
     ExpandDirective,
     RecipeEditComponent,
-    RecipePageComponent
+    RecipePageComponent,
+    FloorPipe,
+    OrderedListComponent,
+    TruncatePipe,
+    RecipeOverviewComponent,
+    RecipeStepsComponent,
+    RecipeIngredientsComponent
   ],
   imports: [
     BrowserModule,

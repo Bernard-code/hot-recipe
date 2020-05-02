@@ -1,0 +1,17 @@
+
+.content-container {
+  padding: 10px;
+  h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0;
+  }
+  .ingredients {  
+    li {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: 200;
+    }
+  }
+}

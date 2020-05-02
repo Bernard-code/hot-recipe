@@ -1,0 +1,26 @@
+
+.content-container {
+  padding: 10px;
+  h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0;
+  }
+  .steps {  
+    li {
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 200;
+      padding-left: 10px;
+      position: relative;
+        &:before {
+        content: '|';
+        position: absolute;
+        top: -4px;
+        left: -2px;        
+        font-size: 24px;
+      }
+    }
+  }
+}

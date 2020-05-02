@@ -1,10 +1,16 @@
 
 export interface Meal {
-  name?: string;
+  name: string;
+  makingTime?: string;
+  
+  description?: string;
+  ingredients?: string[];
+  steps?: string[];
   img?: string;
+  
   category?: string;
   tags?: string[];
-  makingTime?: string;
+
   timestamp: number | Date;
   id?: string;
 }

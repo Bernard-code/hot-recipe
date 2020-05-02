@@ -6,15 +6,28 @@ import { Component } from '@angular/core';
 })
 export class AppPlanComponent {
   plan = [
-    'recipe page',
-    'recipe edit',
-    'cam access',
-    'first deploy for mobile',
-    'select by tags/category',
-    'add calories',
+    'delete recipe -> snack bar error ??',
+    'ordered list look like chips ??',
+    'add cool font with weights: 200, 400, 500, 600, 700, 900',
+    'ocena przepisu/ulubione',
+    'robione/nie robione',
+
+    'compose day of eating',
+    'days of eating library',
+    'count calories of day of eating',
+
+    'cook step by step',
+    'ingredients directions tabs',
+
     'compose day plan of eating',
-    'delete recipe -> snack bar notification',
+    'add calories',
+    'generate shopping list',
+    'select by tags/category',
+    
+    'cam access',
     'images stored on device - service workers',
     'webcam style on mobile',
+    'recipe page',
+    'additional recipe fields'
   ]
 }

@@ -1,0 +1,48 @@
+
+<div class="recipe-wrap" *ngIf="meal">
+
+  <div class="row">
+    <div
+      *ngIf="mealImage$ | async as mealImage"
+      [ngStyle]="{'background-image':'url(' + mealImage + ')'}"
+      class="recipe-img">
+    </div>
+
+    <div class="title-box">
+      <h4 class="title">{{ meal.name | truncate: 23 }}</h4>        
+      <div class="category">{{ meal.category }}</div>
+      <div class="category" *ngIf="meal.makingTime">
+        <span class="makin-time">
+          Making time:
+        </span>
+        {{ meal.makingTime }}
+      </div>
+      <div class="description">{{ meal.description }}</div>
+    </div> 
+  </div>
+
+  <div class="row">
+
+  </div>
+
+  <div class="options">
+    <button 
+      [routerLink]="['/']"
+      mat-raised-button 
+      color="primary"
+      class="update-button"
+      type="button">
+      <mat-icon>chevron_left</mat-icon>
+      Go back
+    </button>
+    <button 
+      [routerLink]="['/recipe-edit', meal.id]"
+      mat-raised-button 
+      color="primary"
+      class="update-button"
+      type="button">
+      Edit
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+</div>

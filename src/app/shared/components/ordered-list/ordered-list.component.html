@@ -1,0 +1,35 @@
+
+<div class="list-row">
+  <mat-form-field
+  class="list-input">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      [(ngModel)]="controlField"
+      autocomplete="off"
+      (keyup.enter)="onAddItem()"
+      matInput 
+      placeholder="placeholder">
+      <button 
+        (click)="onAddItem()"
+        class="add-item"
+        type="button"
+        mat-mini-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+  </mat-form-field>
+  
+  <div class="outer-wrapper">
+    <div class="list-wrapper">
+      <div 
+        class="single-item"
+        *ngFor="let item of items; let i = index">
+        <mat-icon>insert_emoticon</mat-icon>
+        <span>{{ i + 1 }}. {{ item }}</span>
+        <mat-icon 
+          class="remove-icon"
+          (click)="onRemoveItem(i)"
+          color="warn">remove_circle</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

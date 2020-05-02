@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
-import 'firebase/storage';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Meal } from '../../shared/models/meal.model';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { MealService } from '../../shared/services/food.service';
 import { FileService } from 'src/app/shared/services/file.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-meal',
@@ -14,32 +12,27 @@ import { FileService } from 'src/app/shared/services/file.service';
   styleUrls: ['./add-meal.component.scss']
 })
 export class AddMealComponent implements OnInit {
-  @ViewChild('addForm', {'static': false})
-  form: NgForm;
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
+  mealForm: FormGroup;
   useCamera = false;
   uploadedFile: File;
   uploadPercent$ = new BehaviorSubject<number>(null);
   downloadURL = new BehaviorSubject<any>(null);
-  meal: Meal = {
-    name: '',
-    img: '',
-    category: '',
-    tags: [],
-    makingTime: '',
-    timestamp: 0
-  };
+  meal: Meal;
 
   constructor(
-    private storage: AngularFireStorage,
     private mealService: MealService,
     private fileService: FileService
   ) { }
 
   ngOnInit() {
+    this.initializeForm();
   }
 
   capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    if( string !== null ) {
+      return string.charAt(0).toUpperCase() + string.slice(1);      
+    }
   }
 
   onHandleImageEmit(img) {
@@ -67,28 +60,61 @@ export class AddMealComponent implements OnInit {
     this.useCamera = !this.useCamera;
   }
 
-  onSubmit(form) {
-    this.meal.timestamp = Date.now();
-    this.meal.name = this.capitalizeFirstLetter(this.form.value.name)
-    this.meal.category = this.capitalizeFirstLetter(this.form.value.category);
-    this.meal.tags = this.form.value.tags.split(',');
-    this.meal.makingTime = this.capitalizeFirstLetter(this.form.value.makingTime);
-    
-    const fileUploading = this.fileService.onFileUpload(this.uploadedFile)
-    this.meal.img = fileUploading.filePath;
-    
-    console.log(this.meal)
-    
-    fileUploading.imgPercent$.subscribe( percent => {
-      this.uploadPercent$.next(percent);
+  initializeForm() {
+    this.mealForm = new FormGroup({
+      'name': new FormControl(''),
+      'makingTime': new FormControl(''),
+      'category': new FormControl(''),
+      'steps': new FormControl([]),
+      'ingredients': new FormControl([]),
+      'tags': new FormControl([]),
+      'description': new FormControl('')
     })
+  }
+  
+  onAddIngr(ingredients) {
+    this.mealForm.value.ingredients = ingredients;
+  }
+  
+  onAddStep(steps) {
+    this.mealForm.value.steps = steps;
+  }
+  
+  onAddSTag(tags) {
+    this.mealForm.value.tags = tags;
+  }
+
+  onSubmit() {    
+    this.meal = {
+      timestamp: Date.now(),
+      name: this.capitalizeFirstLetter(this.mealForm.value.name),
+      makingTime: this.capitalizeFirstLetter(this.mealForm.value.makingTime),
+      category: this.capitalizeFirstLetter(this.mealForm.value.category),
+      ingredients: this.mealForm.value.ingredients,
+      steps: this.mealForm.value.steps,
+      tags: this.mealForm.value.tags,
+      description: this.capitalizeFirstLetter(this.mealForm.value.description),
+    }
     
-    fileUploading.task$
-    .pipe(
-      finalize(() => this.mealService.addMeal(this.meal) )
-    )
-    .subscribe(res => {
-    });
+    console.log(this.meal);
+
+    if (this.uploadedFile) {
+      const fileUploading = this.fileService.onFileUpload(this.uploadedFile);
+      this.meal.img = fileUploading.filePath;    
+      
+      fileUploading.imgPercent$.subscribe( percent => {
+        this.uploadPercent$.next(percent);
+      })
+      
+      fileUploading.task$
+      .pipe(
+        finalize(() => this.mealService.addMeal(this.meal) )
+      )
+      .subscribe(res => {
+      });
+    } else {
+      this.mealService.addMeal(this.meal);
+    }
     
   }
 

@@ -2,36 +2,46 @@
   border: rgb(210, 210, 210) 1px solid;
   display: flex;
   padding: 0 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgb(43, 127, 226);
+  z-index: 99;
   a {
     padding: 10px 0;
     margin-right: 15px;
     text-decoration: none;
     text-transform: uppercase;
-    color: rgb(43, 127, 226);
+    color: #b0b5f8;
     font-size: 16px;
-    transition: color ease .4s;
     position: relative;
-    &:after {
-      transform: translateY(-5px);
-      transition: all ease .4s;
-      opacity: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      height: 2px;
-      background: rgb(43, 127, 226);
-      position: absolute;
-      content: '';
-    }
+    flex-grow: 1;
     &:hover,
     &.active,
     &:focus {
+      .item-container {
+        mat-icon {
+          color: #fff;
+        }
+      }
       &:after {
         transform: translateY(0);
         opacity: 1;
       }
-      color: rgb(43, 127, 226);
+      color: #fff;;
       outline: none;
+    }
+    .item-container {
+      display: flex;
+      flex-direction: column;      
+      mat-icon {
+        color: #b0b5f8;
+        margin: 0 auto;
+      }
+      span {
+        text-align: center;
+      }
     }
   }
 }

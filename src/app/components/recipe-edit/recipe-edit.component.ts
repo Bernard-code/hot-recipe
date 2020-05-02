@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Meal } from 'src/app/shared/models/meal.model';
 import { FileService } from 'src/app/shared/services/file.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -18,8 +18,9 @@ export class RecipeEditComponent implements OnInit {
   id: string;
   meal$ = new BehaviorSubject<Meal>(null);
   updatedMeal: Meal = {
+    name: '', 
     timestamp: 0
-  }
+  };
   mealImage$: Observable<string | null>;
   editForm: FormGroup;
 
@@ -31,12 +32,19 @@ export class RecipeEditComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.initializeForm();
     this.setParams();
-    this.getEditedMeal();
+  }
+
+  initializeForm() {
     this.editForm = new FormGroup({
       'name': new FormControl(),
       'category': new FormControl(),
-      'tags': new FormControl(),
+      'tags': new FormControl([]),
+      'ingredients': new FormControl([]),
+      'makingTime': new FormControl(),
+      'description': new FormControl(),
+      'steps': new FormControl([]),
     })
   }
 
@@ -44,7 +52,7 @@ export class RecipeEditComponent implements OnInit {
     this.route.params
     .subscribe( (params: Params) => {
         this.id = params['id']
-        this.updatedMeal.id = this.id;
+        this.getEditedMeal();
       }      
     )
   }
@@ -53,27 +61,50 @@ export class RecipeEditComponent implements OnInit {
     this.mealsService.getTheMeal(this.id)
       .subscribe( meal => {
         this.meal$.next(meal)
+        this.updatedMeal = meal;
         if( meal.img ) {
           this.mealImage$ = this.fileService.getImage(meal.img);
-          this.updatedMeal.img = meal.img;
         }
-        this.initializeForm(meal)
+        this.udpateForm(meal)
       });
   }
 
-  initializeForm(meal: Meal) {
-    this.editForm.controls.name.setValue(meal.name)
-    this.editForm.controls.category.setValue(meal.category)
-    this.editForm.controls.tags.setValue(meal.tags)
+  udpateForm(meal: Meal) {
+    this.editForm.controls.name.setValue(meal.name);
+    this.editForm.controls.category.setValue(meal.category);
+    this.editForm.controls.makingTime.setValue(meal.makingTime);
+    this.editForm.controls.description.setValue(meal.description);
+    this.editForm.controls.steps.setValue(meal.steps);
+    this.editForm.controls.ingredients.setValue(meal.ingredients);
+    this.editForm.controls.tags.setValue(meal.tags);
+    this.updatedMeal.timestamp = meal.timestamp;
   }
 
   onUpdateRecipe() {
-    this.updatedMeal.name = this.editForm.value.name;
-    this.updatedMeal.category = this.editForm.value.category;
-    this.updatedMeal.tags = this.editForm.value.tags;
-    this.updatedMeal.timestamp = Date.now();
-    
+    this.updatedMeal = {
+      name: this.editForm.value.name,
+      category: this.editForm.value.category,
+      makingTime: this.editForm.value.makingTime,
+      ingredients: this.editForm.value.ingredients,
+      steps: this.editForm.value.steps,
+      tags: this.editForm.value.tags,
+      description: this.editForm.value.description,
+      timestamp: this.updatedMeal.timestamp,
+      id: this.id
+    } 
     return this.mealsService.updateItem(this.updatedMeal);
+  }
+  
+  onAddIngr(ingredients) {
+    this.editForm.value.ingredients = ingredients;
+  }
+  
+  onAddStep(steps) {
+    this.editForm.value.steps = steps;
+  }
+  
+  onAddSTag(tags) {
+    this.editForm.value.tags = tags;
   }
 
   openDeleteDialog(): void {
@@ -89,6 +120,18 @@ export class RecipeEditComponent implements OnInit {
         }
       }
     });
+  }
+  check(x){
+    console.log(x)
+    if (x === 'steps'){
+      console.log(this.updatedMeal.steps)
+    }
+    if (x === 'form'){
+      console.log(this.updatedMeal)
+    }
+    if (x === 'ingrs') {
+      console.log(this.updatedMeal.ingredients)
+    }
   }
 
 }

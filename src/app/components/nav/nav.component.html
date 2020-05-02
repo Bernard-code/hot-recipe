@@ -1,13 +1,29 @@
 
 <div class="nav">
+  
   <a
     routerLinkActive="active"
     [routerLinkActiveOptions]="{exact: true}"
-    routerLink="/">Home</a>
+    routerLink="/">
+    <div class="item-container">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>    
+    </div>
+  </a>
   <a
     routerLinkActive="active"
-    routerLink="/add">Add meal :3</a>
+    routerLink="/add">
+    <div class="item-container">
+    <mat-icon>add_box</mat-icon>
+      <span>Add meal :3</span>
+      </div>
+  </a>
   <a
     routerLinkActive="active"
-    routerLink="/app-plan">App plan</a>
+    routerLink="/app-plan">
+    <div class="item-container">
+    <mat-icon>format_list_bulleted</mat-icon>
+      <span>App plan</span>    
+      </div>
+  </a>
 </div>
